@@ -18,7 +18,7 @@ building:
 stylecheck:
   stage: codestyle
   tags:
-    -gitlab
+    - gitlab
   script:
     - apk add --upgrade clang-extra-tools build-base
     - output=$(clang-format -style="{$(grep $CI_PROJECT_DIR BasedOnStyle)}" -n $(find $CI_PROJECT_DIR -name *.[ch]))

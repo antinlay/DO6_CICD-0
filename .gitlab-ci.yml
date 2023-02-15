@@ -11,8 +11,8 @@ building:
     - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
   artifacts:
     paths:
-      - find $CI_PROJECT_DIR -name s21_cat -exec dirname {} \;
-      - find $CI_PROJECT_DIR -name s21_grep -exec dirname {} \;
+      - $CI_PROJECT_DIR/src/C3_SimpleBashUtils-0/cat/s21_cat
+      - $CI_PROJECT_DIR/src/C3_SimpleBashUtils-0/grep/s21_grep
     expire_in: 30 days
 
 stylecheck:

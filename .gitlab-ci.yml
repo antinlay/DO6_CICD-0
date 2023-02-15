@@ -1,0 +1,19 @@
+stages:
+  - build
+
+building:
+  stage: build
+  tags:
+    - part1
+  script:
+    - cd src/
+    - git clone ssh://git@repos-ssh.21-school.ru:2289/students/C3_SimpleBashUtils.ID_353513/janiecee_student.21_school.ru/C3_SimpleBashUtils-0.git -b develop
+    - cd C3_SimpleBashUtils-0-develop/src/cat
+    - make
+    - cd ../grep
+    - make
+  artifacts:
+    paths:
+      - src/build/cat
+      - src/build/grep
+    expire_in: 30 days

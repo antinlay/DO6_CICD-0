@@ -1,5 +1,6 @@
 stages:
   - build
+  - codestyle
 
 building:
   stage: build
@@ -7,14 +8,19 @@ building:
     - gitlab
   script:
     - apk add build-base
-    - cd src/C3_SimpleBashUtils-0/cat 
-    - make
-    - cp ./s21_cat $CI_PROJECT_DIR/src/cat
-    - cd ../grep
-    - make
-    - cp ./s21_grep $CI_PROJECT_DIR/src/grep
+    - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/src/cat
-      - $CI_PROJECT_DIR/src/grep
+      - find $CI_PROJECT_DIR -name s21_cat -exec dirname {} \;
+      - find $CI_PROJECT_DIR -name s21_grep -exec dirname {} \;
     expire_in: 30 days
+
+stylecheck:
+  stage: codestyle
+  tags:
+    -gitlab
+  script:
+    - apk add --upgrade clang-extra-tools build-base
+    - output=$(clang-format -style="{$(grep $CI_PROJECT_DIR BasedOnStyle)}" -n $(find $CI_PROJECT_DIR -name *.[ch]))
+    - if [ -n "$output" ]; then echo "$output" && exit 1; fi
+

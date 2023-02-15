@@ -7,7 +7,7 @@ building:
     - gitlab
   script:
     - cd src/
-    - bash script.sh
+    - sh script.sh
     - cd C3_SimpleBashUtils-0/src/cat/
     - make
     - cp ./s21_cat $CI_PROJECT_DIR/src/cat/

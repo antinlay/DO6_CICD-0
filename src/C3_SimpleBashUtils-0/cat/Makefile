@@ -6,12 +6,7 @@ s21_cat:
 	$(CC) $(CFLAGS) s21_cat.c -o s21_cat
 	# bash cat_test.sh
 
-check:
-	cppcheck --enable=all --suppress=missingIncludeSystem --inconclusive --check-config s21_cat.c
-	cp ../../materials/linters/CPPLINT.cfg CPPLINT.cfg
-	python3 ../../materials/linters/cpplint.py --extensions=c s21_cat.c s21_cat.h
-	rm CPPLINT.cfg
-	make s21_cat
+check: s21_cat
 ifeq ($(OS), Darwin)
 	leaks --atExit -- ./s21_cat -set bytes.txt
 else

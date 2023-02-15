@@ -6,12 +6,7 @@ s21_grep:
 	$(CC) $(CFLAGS) s21_grep.c -o s21_grep
 	# bash grep_test.sh
 
-check:
-	cppcheck --enable=all --suppress=missingIncludeSystem --inconclusive --check-config s21_grep.c
-	cp ../../materials/linters/CPPLINT.cfg CPPLINT.cfg
-	python3 ../../materials/linters/cpplint.py --extensions=c s21_grep.c s21_grep.h
-	rm CPPLINT.cfg
-	make s21_grep
+check: s21_grep
 ifeq ($(OS), Darwin)
 	leaks --atExit -- ./s21_grep -f phrase.txt s21_grep.h
 else

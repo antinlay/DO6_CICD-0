@@ -6,17 +6,15 @@ building:
   tags:
     - gitlab
   script:
-    - cd src/
-    - sh script.sh
-    - cd C3_SimpleBashUtils-0/src/cat/
+    - apk add build-base
+    - cd src/C3_SimpleBashUtils-0/cat 
     - make
-    - cp ./s21_cat $CI_PROJECT_DIR/src/cat/
-    - cd ../grep/
+    - cp ./s21_cat $CI_PROJECT_DIR/src/cat
+    - cd ../grep
     - make
-    - cp ./s21_grep $CI_PROJECT_DIR/src/grep/
-    - rm -rf $CI_PROJECT_DIR/src/C3_SimpleBashUtils-0/
+    - cp ./s21_grep $CI_PROJECT_DIR/src/grep
   artifacts:
     paths:
-      - $CI_PROJECT_DIR/src/cat/
-      - $CI_PROJECT_DIR/src/grep/
+      - $CI_PROJECT_DIR/src/cat
+      - $CI_PROJECT_DIR/src/grep
     expire_in: 30 days

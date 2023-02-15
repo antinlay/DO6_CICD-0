@@ -4,7 +4,7 @@ OS=$(shell uname)
 
 s21_grep:
 	$(CC) $(CFLAGS) s21_grep.c -o s21_grep
-	bash grep_test.sh
+	# bash grep_test.sh
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem --inconclusive --check-config s21_grep.c

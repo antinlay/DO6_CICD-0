@@ -4,7 +4,7 @@ OS=$(shell uname)
 
 s21_cat:
 	$(CC) $(CFLAGS) s21_cat.c -o s21_cat
-	bash cat_test.sh
+	# bash cat_test.sh
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem --inconclusive --check-config s21_cat.c

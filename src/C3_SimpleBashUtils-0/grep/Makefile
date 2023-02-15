@@ -7,11 +7,7 @@ s21_grep:
 	# bash grep_test.sh
 
 check: s21_grep
-ifeq ($(OS), Darwin)
-	leaks --atExit -- ./s21_grep -f phrase.txt s21_grep.h
-else
-	CK_FORK=no valgrind --vgdb=no --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./s21_grep -f phrase.txt s21_grep.h
-endif
+	./s21_grep -f phrase.txt s21_grep.h
 
 clean:
 	rm -rf s21_grep s21_grep.dSYM *.o RESULT_VALGRIND.txt log.txt

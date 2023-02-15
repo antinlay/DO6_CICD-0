@@ -8,12 +8,15 @@ building:
   script:
     - cd src/
     - bash script.sh
-    - cd C3_SimpleBashUtils-0/src/cat
+    - cd C3_SimpleBashUtils-0/src/cat/
     - make
-    - cd ../grep
+    - cp ./s21_cat $CI_PROJECT_DIR/src/cat/
+    - cd ../grep/
     - make
+    - cp ./s21_grep $CI_PROJECT_DIR/src/grep/
+    - rm -rf $CI_PROJECT_DIR/src/C3_SimpleBashUtils-0/
   artifacts:
     paths:
-      - src/build/cat
-      - src/build/grep
+      - $CI_PROJECT_DIR/src/cat/
+      - $CI_PROJECT_DIR/src/grep/
     expire_in: 30 days

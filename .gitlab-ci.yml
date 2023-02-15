@@ -21,6 +21,6 @@ stylecheck:
     - gitlab
   script:
     - apk add --upgrade clang-extra-tools build-base findutils
-    - output=$(clang-format -style="{$(grep $CI_PROJECT_DIR BasedOnStyle)}" -n $(find $CI_PROJECT_DIR -name *.[ch]))
-    - if [ -n "$output" ]; then echo "$output" && exit 1; fi
+    - output=$(clang-format -style="{$(grep ./materials/linters/.clang-format -e "BasedOnStyle")}" -n $(find $CI_PROJECT_DIR -name *.[ch]))
+    - if [ -n "$output" ]; then echo "$output" && return 2; fi
 

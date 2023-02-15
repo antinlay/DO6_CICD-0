@@ -7,7 +7,7 @@ building:
   tags:
     - gitlab
   script:
-    - apk add build-base
+    - apk add build-base findutils
     - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
   artifacts:
     paths:
@@ -20,7 +20,7 @@ stylecheck:
   tags:
     - gitlab
   script:
-    - apk add --upgrade clang-extra-tools build-base
+    - apk add --upgrade clang-extra-tools build-base findutils
     - output=$(clang-format -style="{$(grep $CI_PROJECT_DIR BasedOnStyle)}" -n $(find $CI_PROJECT_DIR -name *.[ch]))
     - if [ -n "$output" ]; then echo "$output" && exit 1; fi
 

@@ -20,3 +20,4 @@ building:
       - $CI_PROJECT_DIR/src/cat/
       - $CI_PROJECT_DIR/src/grep/
     expire_in: 30 days
+    

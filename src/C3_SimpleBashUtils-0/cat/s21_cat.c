@@ -19,7 +19,6 @@ int main(int argc, char *argv[]) {
       count++;
     }
   } else {
-    
   }
   return ok;
 }

@@ -1,6 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-output=$(clang-format -style="{$(grep ../ BasedOnStyle)}" -n $(find ../ -name *.[ch]))
+# output=$(clang-format -style="{$(grep ../ BasedOnStyle)}" -n $(find ../ -name *.[ch]))
+
+output=$(find . -name '*_test.sh' -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
+# output=$(bash $(find . -name 'cat_test.sh' -type f))
+
 
 if [ -n "$output" ]; then echo "$output" && exit 1; fi
 

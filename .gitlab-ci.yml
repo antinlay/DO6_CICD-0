@@ -46,6 +46,6 @@ deployment:
     - gitlab
   script:
     # - apk add --upgrade findutils bash openssh
-    - bash script
+    - bash script.sh
   when: manual
   

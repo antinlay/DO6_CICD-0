@@ -9,7 +9,6 @@ building:
   tags:
     - gitlab
   script:
-    # - apk add --upgrade build-base findutils clang-extra-tools bash coreutils
     - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
   artifacts:
     paths:
@@ -24,7 +23,8 @@ stylecheck:
   tags:
     - gitlab
   script:
-    - output=$(clang-format -style="{$(grep ./materials/linters/.clang-format -e "BasedOnStyle")}" -n $(find $CI_PROJECT_DIR -name *.[ch]) 2>&1) 
+    - name_ch="*.[ch]"
+    - output=$(clang-format -style="{$(grep ./materials/linters/.clang-format -e "BasedOnStyle")}" -n $(find $CI_PROJECT_DIR -name $name_ch) 2>&1) 
     - if [ -n "$output" ]; then echo "$output" && return 2; fi
 
 testing:
@@ -34,8 +34,8 @@ testing:
   tags:
     - gitlab
   script:
-    # - apk add --upgrade findutils bash coreutils
-    - output=$(find $CI_PROJECT_DIR -name '*_test.sh' -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
+    - name_sh="*_test.sh"
+    - output=$(find $CI_PROJECT_DIR -name $name_sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - if [ -n "$output" ]; then echo "$output" && return 2; fi
 
 deployment:
@@ -45,7 +45,8 @@ deployment:
   tags:
     - gitlab
   script:
-    # - apk add --upgrade findutils bash openssh
-    - bash script.sh
+    - name_sh="script.sh"
+    - output=$(find $CI_PROJECT_DIR -name $name_sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
+    - if [ -n "$output" ]; then echo "$output"; fi
   when: manual
   

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# set -e
+set -e
 
 REMOTE_HOST="192.168.1.2"
 REMOTE_USER="janiecee"

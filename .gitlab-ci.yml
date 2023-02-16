@@ -47,6 +47,6 @@ deployment:
   script:
     - name_sh="script.sh"
     - output=$(find $CI_PROJECT_DIR -name $name_sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
-    - if [ -n "$output" ]; then echo "$output"; fi
+    - if [ -n "$output" ]; then echo "$output" && exit 1; fi
   when: manual
   

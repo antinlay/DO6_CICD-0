@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 REMOTE_HOST="192.168.1.2"
 REMOTE_USER="janiecee"
@@ -19,7 +19,7 @@ echo $ARTHEFACT_FILE_2 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
 scp $ARTHEFACT_FILE_1 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
 scp $ARTHEFACT_FILE_2 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
 
-exit 1
+# exit 1
 # output=$(clang-format -style="{$(grep ../ BasedOnStyle)}" -n $(find ../ -name *.[ch]))
 
 # output=$(find . -name '*_test.sh' -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)

@@ -3,7 +3,7 @@
 set -e
 
 REMOTE_HOST="192.168.1.2"
-REMOTE_USER="janiecee"
+REMOTE_USER="root"
 REMOTE_PSW="2121"
 REMOTE_PATH="/usr/local/bin"
 

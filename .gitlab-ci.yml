@@ -2,13 +2,14 @@ stages:
   - build
   - codestyle
   - tests
+  - deploy
 
 building:
   stage: build
   tags:
     - gitlab
   script:
-    - apk add build-base findutils
+    # - apk add --upgrade build-base findutils clang-extra-tools bash coreutils
     - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
   artifacts:
     paths:
@@ -21,16 +22,30 @@ stylecheck:
   tags:
     - gitlab
   script:
-    - apk add --upgrade clang-extra-tools build-base findutils
+    # - apk add --upgrade clang-extra-tools findutils
     - output=$(clang-format -style="{$(grep ./materials/linters/.clang-format -e "BasedOnStyle")}" -n $(find $CI_PROJECT_DIR -name *.[ch]) 2>&1) 
     - if [ -n "$output" ]; then echo "$output" && return 2; fi
 
 testing:
   stage: tests
+  dependencies:
+    - build
   tags:
     - gitlab
   script:
-    - apk add --upgrade build-base findutils bash coreutils
-    - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
+    # - apk add --upgrade findutils bash coreutils
+    # - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
     - output=$(find $CI_PROJECT_DIR -name '*_test.sh' -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - if [ -n "$output" ]; then echo "$output" && return 2; fi
+
+deployment:
+  stage: deploy
+  dependencies:
+    - tests
+  tags:
+    - gitlab
+  script:
+    # - apk add --upgrade findutils bash openssh
+    - bash script
+  when: manual
+  

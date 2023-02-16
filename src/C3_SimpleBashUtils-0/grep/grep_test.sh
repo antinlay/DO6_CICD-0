@@ -1,4 +1,10 @@
 #!/bin/bash
+
+bytes=$(find $CI_PROJECT_DIR -type f -name 'bytes.txt')
+s21_cat=$(find $CI_PROJECT_DIR -type f -name 's21_cat')
+touch s21_cat.txt cat.txt
+s21_cat_txt=$(find $CI_PROJECT_DIR -type f -name 's21_cat.txt')
+cat_txt=$(find $CI_PROJECT_DIR -type f -name 'cat.txt')
 #1 -e
 ./s21_grep -e 127 s21_grep.c >> s21_grep.txt
 grep -e 127 s21_grep.c >> grep.txt

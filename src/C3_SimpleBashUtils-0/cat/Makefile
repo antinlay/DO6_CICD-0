@@ -7,7 +7,7 @@ s21_cat:
 	# bash cat_test.sh
 
 check: s21_cat
-	./s21_cat -set bytes.txt
+	sh cat_test.sh
 
 clean:
 		rm -rf s21_cat s21_cat.dSYM *.o RESULT_VALGRIND.txt log.txt

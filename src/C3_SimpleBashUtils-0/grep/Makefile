@@ -7,7 +7,7 @@ s21_grep:
 	# bash grep_test.sh
 
 check: s21_grep
-	./s21_grep -f phrase.txt s21_grep.h
+	sh grep_test.sh
 
 clean:
 	rm -rf s21_grep s21_grep.dSYM *.o RESULT_VALGRIND.txt log.txt

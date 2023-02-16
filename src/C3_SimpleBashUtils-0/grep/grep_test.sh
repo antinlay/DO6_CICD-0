@@ -11,7 +11,7 @@ grep_txt=$(find $CI_PROJECT_DIR -type f -name 'grep.txt')
 arr=("-i" "-v" "-c" "-l" "-h" "-s" "-in" "-cv" "-iv" "-lv")
 
 for flag in ${arr[*]}; do
-    ./$s21_grep $flag int $s21_grep_c >> $s21_grep_txt
+    $s21_grep $flag int $s21_grep_c >> $s21_grep_txt
     grep $flag int $s21_grep_c >> $grep_txt
     if cmp -s $s21_grep_txt $grep_txt; then 
         :

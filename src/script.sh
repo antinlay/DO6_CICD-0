@@ -1,16 +1,17 @@
 #!/bin/bash
 
+set -e
+
 REMOTE_HOST="192.168.1.2"
 REMOTE_USER="root"
 REMOTE_PSW="2121"
 REMOTE_PATH="/usr/local/bin/"
 
 # ARTHEFACT_FILES=$(find $CI_PROJECT_DIR -type f -executable -name s21_*)
-ARTHEFACT_FILE_1=./src/C3_SimpleBashUtils-0/cat/s21_cat
-ARTHEFACT_FILE_2=$CI_PROJECT_DIR/src/C3_SimpleBashUtils-0/grep/s21_grep
+ARTHEFACT_FILE_1=$(find . -type f -executable -name s21_cat)
+ARTHEFACT_FILE_2=$(find . -type f -executable -name s21_grep)
 # ssh-copy-id $REMOTE_USER@$REMOTE_HOST
 # ssh $REMOTE_USER@$REMOTE_HOST "echo $REMOTE_PSW | sudo chown -R $REMOTE_USER@$REMOTE_HOST /usr/local/bin"
-set -e
 scp $ARTHEFACT_FILE_1 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
 scp $ARTHEFACT_FILE_2 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
 

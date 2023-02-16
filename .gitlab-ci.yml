@@ -34,7 +34,6 @@ testing:
     - gitlab
   script:
     # - apk add --upgrade findutils bash coreutils
-    # - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
     - output=$(find $CI_PROJECT_DIR -name '*_test.sh' -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - if [ -n "$output" ]; then echo "$output" && return 2; fi
 

@@ -41,7 +41,7 @@ testing:
 deployment:
   stage: deploy
   dependencies:
-    - tests
+    - build
   tags:
     - gitlab
   script:

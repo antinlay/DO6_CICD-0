@@ -29,7 +29,7 @@ stylecheck:
 testing:
   stage: tests
   dependencies:
-    - build
+    - building
   tags:
     - gitlab
   script:
@@ -40,7 +40,7 @@ testing:
 deployment:
   stage: deploy
   dependencies:
-    - build
+    - building
   tags:
     - gitlab
   script:

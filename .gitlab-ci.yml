@@ -38,6 +38,7 @@ testing:
 
 deployment:
   stage: deploy
+  when: manual
   dependencies:
     - building
   tags:
@@ -48,5 +49,11 @@ deployment:
     # - output=$(find $CI_PROJECT_DIR -name script.sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - bash $CI_PROJECT_DIR/src/script.sh
     # - if [ -n "$output" ]; then echo "$output" && exit 1; fi
-  when: manual
+  before_script:
+    # the following script is taken from https://docs.gitlab.com/ee/ci/ssh_keys/README.html
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
   

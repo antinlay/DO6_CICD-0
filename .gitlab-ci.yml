@@ -49,7 +49,7 @@ deployment:
     - chmod 600 ~/.ssh/id_rsa ~/.ssh/config ~/.ssh/known_hosts
     - echo "$OPENSSH_KEY" >> ~/.ssh/id_rsa
     - echo "Host *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
-    - ssh-keyscan ${DEV_HOST} >> ~/.ssh/known_hosts
+    - ssh-keyscan 192.168.1.2 >> ~/.ssh/known_hosts
   script:
     # - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
     # - name_sh="script.sh"

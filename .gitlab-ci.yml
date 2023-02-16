@@ -43,11 +43,16 @@ deployment:
     - building
   tags:
     - gitlab
+  before_script:
+    - mkdir -p ~/.ssh
+    - touch ~/.ssh/id_rsa ~/.ssh/config ~/.ssh/known_hosts
+    - chmod 600 ~/.ssh/id_rsa ~/.ssh/config ~/.ssh/known_hosts
+    - echo "$OPENSSH_KEY" >> ~/.ssh/id_rsa
+    - echo "Host *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
+    - ssh-keyscan ${DEV_HOST} >> ~/.ssh/known_hosts
   script:
     # - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
     # - name_sh="script.sh"
     # - output=$(find $CI_PROJECT_DIR -name script.sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - bash $CI_PROJECT_DIR/src/script.sh
     # - if [ -n "$output" ]; then echo "$output" && exit 1; fi
-
-  

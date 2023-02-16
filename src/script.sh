@@ -1,8 +1,8 @@
 #!/bin/bash
 
 set -e
-scp src/C3_SimpleBashUtils-0/cat/s21_cat janiecee@192.168.1.2:/usr/local/bin
-scp src/C3_SimpleBashUtils-0/grep/s21_grep janiecee@192.168.1.2:/usr/local/bin
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r src/C3_SimpleBashUtils-0/cat/s21_cat janiecee@192.168.1.2:/usr/local/bin
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r src/C3_SimpleBashUtils-0/grep/s21_grep janiecee@192.168.1.2:/usr/local/bin
 # REMOTE_HOST="192.168.1.2"
 # REMOTE_USER="root"
 # REMOTE_PSW="2121"

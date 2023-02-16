@@ -51,7 +51,6 @@ deployment:
     - echo "Host *\n\tStrictHostKeyChecking no" >> ~/.ssh/config
     - ssh-keyscan 192.168.1.2 >> ~/.ssh/known_hosts
   script:
-    # - find $CI_PROJECT_DIR -name "Makefile" -execdir make \;
     # - name_sh="script.sh"
     # - output=$(find $CI_PROJECT_DIR -name script.sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - bash $CI_PROJECT_DIR/src/script.sh

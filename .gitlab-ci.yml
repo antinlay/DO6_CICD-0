@@ -47,3 +47,5 @@ deployment:
     - name_sh="script.sh"
     - output=$(find $CI_PROJECT_DIR -name script.sh -type f -print0 | while IFS= read -r -d $'\0' file; do bash "$file"; done 2>&1)
     - if [ -n "$output" ]; then echo "$output"; fi
+  after_script:
+    - bash src/tg_notif.sh

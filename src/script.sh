@@ -2,7 +2,7 @@
 
 REMOTE_HOST="192.168.179.159"
 REMOTE_USER="janiecee"
-REMOTE_PSW="2121"
+# REMOTE_PSW="2121"
 REMOTE_PATH="/usr/local/bin/"
 
 ARTHEFACT_FILE_1=$(find . -type f -executable -name s21_cat)

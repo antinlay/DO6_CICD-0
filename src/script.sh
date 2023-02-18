@@ -1,25 +1,26 @@
 #!/bin/bash
 
-# Before run this script need 
+# Before run this script needed:
+# 1) Install ssh connection with HOST without password
+#   - change /etc/ssh/config 
+#   - ssh-keygen
+#   - ssh-copy-id $REMOTE_HOST
+# 2) Check ssh connect
+#   - ssh $REMOTE_USER@$REMOTE_HOST
+# Mac-address network adapter
 REMOTE_MAC="08:00:27:79:35:c2"
-INTERFACE=$(ip route list | awk '/^default/ {print $5}');
-IP=$(ip -o -f inet addr show $INTERFACE | awk '/scope global/ {print $4}' | cut -d/ -f1);
-fping -a -g "$IP/24" 2>/dev/null;
+# Ping all machines in network X.X.X.1 - X.X.X.254. This command add all ip in networks to list `arp -e`
+fping -a -g "$IP/24" 2>/dev/null
 REMOTE_HOST=$(arp -e | grep $REMOTE_MAC | awk '{print $1}');
-REMOTE_USER="janiecee"
-# REMOTE_PSW="2121"
-REMOTE_PATH="/usr/local/bin/"
+REMOTE_USER="janiecee";
+REMOTE_PSW="2121";
+REMOTE_PATH="/usr/local/bin/";
+# Arthefact info
+ARTHEFACT_REGEX="s21_*";
+ARTHEFACT_FILE=$(echo $(find . -type f -executable -name $ARTHEFACT_REGEX));
 
-ARTHEFACT_FILE=$(find . -type f -executable -name s21_cat -name s21_grep)
-# ARTHEFACT_FILE_2=$(find . -type f -executable -name s21_grep)
+ssh-keygen -F $REMOTE_HOST > /dev/null || ssh-keyscan -t ecdsa $REMOTE_HOST >> ~/.ssh/known_hosts;
 
-echo $ARTHEFACT_FILE $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
-# echo $ARTHEFACT_FILE_2 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH
-if ssh-keygen -F $REMOTE_HOST > /dev/null; then 
-    echo "$REMOTE_HOST already in ~/.ssh/known_hosts";
-else
-    ssh-keyscan -t ecdsa $REMOTE_HOST >> ~/.ssh/known_hosts;
+if scp $ARTHEFACT_FILE $REMOTE_USER@$REMOTE_HOST:/tmp/ > /dev/null; then
+    ssh $REMOTE_USER@$REMOTE_HOST "echo $REMOTE_PSW | sudo -S mv /tmp/$ARTHEFACT_REGEX $REMOTE_PATH";
 fi
-
-scp $ARTHEFACT_FILE $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH;
-# scp $ARTHEFACT_FILE_2 $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH

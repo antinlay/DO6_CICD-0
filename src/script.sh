@@ -23,4 +23,7 @@ ssh-keygen -F $REMOTE_HOST > /dev/null || ssh-keyscan -t ecdsa $REMOTE_HOST >> ~
 
 if scp $ARTHEFACT_FILE $REMOTE_USER@$REMOTE_HOST:/tmp/ > /dev/null; then
     ssh $REMOTE_USER@$REMOTE_HOST "echo $REMOTE_PSW | sudo -S mv /tmp/$ARTHEFACT_REGEX $REMOTE_PATH";
+else
+    echo "Error: script failed"
+    return 2
 fi

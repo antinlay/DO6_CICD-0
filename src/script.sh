@@ -6,7 +6,7 @@
 #   - ssh-keygen
 #   - ssh-copy-id $REMOTE_HOST
 # 2) Check ssh connect
-#   - ssh $REMOTE_USER@$REMOTE_HOST
+#   - ssh $REMOTE_USER@$REMOTE_HOST.  
 # Mac-address network adapter
 REMOTE_MAC="08:00:27:79:35:c2"
 # Ping all machines in network X.X.X.1 - X.X.X.254. This command add all ip in networks to list `arp -e`
